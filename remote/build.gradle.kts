@@ -1,9 +1,21 @@
+import dependencies.RemoteDependencies
+
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+    id(Config.Plugins.kotlin)
+    id(Config.Plugins.javaLibrary)
 }
 
+
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+    api(project(Modules.data))
+    implementation(RemoteDependencies.coroutine)
+    implementation(RemoteDependencies.javax)
+    RemoteDependencies.retrofit.forEach {
+        implementation(it)
+    }
 }
